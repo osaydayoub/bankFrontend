@@ -1,0 +1,9 @@
+.UsersPage{
+    padding-top: 20px;
+    gap: 20px;
+}
+.users{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
