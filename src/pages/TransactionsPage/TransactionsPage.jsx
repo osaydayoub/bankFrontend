@@ -66,7 +66,7 @@ function TransactionsPage() {
       <div className="transactions_container">
         {Transactions.map((transaction, index) => {
           return (
-            <button key={index} onClick={handlerArray[index]}>
+            <button className="btn-page" key={index} onClick={handlerArray[index]}>
               {transaction}
             </button>
           );

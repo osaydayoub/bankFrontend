@@ -1,3 +1,8 @@
 .TransactionsPage{
     padding-top: 10px;
+    gap: 10px;
+}
+.transactions_container{
+    display: flex ;
+    gap: 10px;
 }
