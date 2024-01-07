@@ -1,9 +1,40 @@
-import React from "react";
-import './TransactionsPage.css'
+import React, { useState } from "react";
+import "./TransactionsPage.css";
+import Deposit from "../../components/Deposit/Deposit";
+import axios from "axios";
 
 function TransactionsPage() {
-  function handelDeposit() {
-    console.log("handelDeposit");
+  const [transactionToDisplay, setTransactionToDisplay] = useState("");
+  const Transactions = [
+    "Deposit",
+    "Update Credit",
+    "Withdraw Money",
+    "Transfer Funds",
+  ];
+  const { deposit, updateCredit, withdrawMoney, transferFunds } = Transactions;
+
+  async function handelDeposit({ ID, amount }) {
+    const deposit = async () => {
+      try {
+        const res = axios.put(
+          `${import.meta.env.VITE_API_LINK}/depositCash`,
+          null,
+          {
+            params: {
+              id: ID,
+              amount: amount,
+            },
+          }
+        );
+        // const res = await axios.put(
+        //   `${import.meta.env.VITE_API_LINK}/depositCash`,{params}
+        // );
+      } catch (error) {
+        console.log(error.response.data);
+      }
+    };
+    await deposit();
+    console.log("handelDepositComleted");
   }
   function handelUpdateCredit() {
     console.log("handelUpdateCredit");
@@ -15,17 +46,19 @@ function TransactionsPage() {
     console.log("handelTransfer");
   }
 
-  const Transactions = [
-    "Deposit",
-    "Update Credit",
-    "Withdraw Money",
-    "Transfer Funds",
-  ];
   const handlerArray = [
-    handelDeposit,
-    handelUpdateCredit,
-    handelWithdraw,
-    handelTransfer,
+    () => {
+      setTransactionToDisplay(deposit);
+    },
+    () => {
+      setTransactionToDisplay(updateCredit);
+    },
+    () => {
+      setTransactionToDisplay(withdrawMoney);
+    },
+    () => {
+      setTransactionToDisplay(transferFunds);
+    },
   ];
   return (
     <div className="TransactionsPage page">
@@ -38,6 +71,11 @@ function TransactionsPage() {
             </button>
           );
         })}
+      </div>
+      <div className="transaction-container">
+        {transactionToDisplay === deposit && (
+          <Deposit handleDeposit={handelDeposit} />
+        )}
       </div>
     </div>
   );

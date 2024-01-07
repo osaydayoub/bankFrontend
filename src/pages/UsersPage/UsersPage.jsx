@@ -9,10 +9,8 @@ function UsersPage() {
   useEffect(() => {
     const getUsersList = async () => {
       try {
-        console.log(import.meta.env.VITE_API_LINK);
         const res = await axios.get(import.meta.env.VITE_API_LINK);
         setUsers(res.data);
-        console.log(res.data);
       } catch (error) {
         console.log("somthing rong happend!");
       }
