@@ -24,14 +24,14 @@ function UsersPage() {
   return (
     <div className="UsersPage page">
       <h1>UsersPage</h1>
-      <button onClick={handleClick}>Click To get all users</button>
+      <button className="btn-page" onClick={handleClick}>Click To get all users</button>
       {displayUsers && (
         <div className="users-container">
           {/* <h1>Users:</h1> */}
           {users && <div className="users">{users.map((u,index)=>{
             return <User key={index} user={u}/>
           })}</div>}
-          <button onClick={() => setDisplayUsers(false)}>Close</button>
+          <button  onClick={() => setDisplayUsers(false)}>Close</button>
         </div>
       )}
     </div>
