@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import "./Deposit.css";
-function Deposit({ handleDeposit }) {
+import React, { useState } from 'react'
+
+function UpdateCredit({handler}) {
   const [userID, setuserID] = useState("");
-  const [amount, setAmount] = useState(0);
+  const [credit, setCredit] = useState(0);
   function handleSubmit(e) {
     e.preventDefault();
-    handleDeposit({
-      ID: userID,
-      amount: amount,
+    handler({
+      id: userID,
+      newCredit: credit,
     });
   }
   return (
-    <div >
-      <h3>Deposit</h3>
-      <form onSubmit={(e) => handleSubmit(e)}>
+    <div>
+        <h3>Update Credit</h3>
+        <form onSubmit={(e) => handleSubmit(e)}>
         <div>
           <label htmlFor="userId">User Id</label>
           <br />
@@ -26,12 +26,12 @@ function Deposit({ handleDeposit }) {
         </div>
 
         <div>
-          <label htmlFor="amount">Deposit Amount</label>
+          <label htmlFor="newCredit">New Credit</label>
           <br />
           <input
             type="number"
-            id="amount"
-            onChange={(e) => setAmount(e.target.value)}
+            id="newCredit"
+            onChange={(e) => setCredit(e.target.value)}
             required
           />
         </div>
@@ -40,7 +40,7 @@ function Deposit({ handleDeposit }) {
         </div>
       </form>
     </div>
-  );
+  )
 }
 
-export default Deposit;
+export default UpdateCredit

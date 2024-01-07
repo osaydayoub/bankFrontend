@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import "./TransactionsPage.css";
 import Deposit from "../../components/Deposit/Deposit";
 import axios from "axios";
+import UpdateCredit from "../../components/UpdateCredit/UpdateCredit";
+import Withdraw from "../../components/Withdraw/Withdraw";
+import Transfer from "../../components/Transfer/Transfer";
 
 function TransactionsPage() {
   const [transactionToDisplay, setTransactionToDisplay] = useState("");
@@ -35,13 +38,70 @@ function TransactionsPage() {
     console.log("handelDepositComleted");
   }
 
-  function handelUpdateCredit() {
-    console.log("handelUpdateCredit");
+  async function handelUpdateCredit({ id, newCredit }) {
+    const Update = async () => {
+      try {
+        const res = axios.put(
+          `${import.meta.env.VITE_API_LINK}/updateCredit`,
+          null,
+          {
+            params: {
+              id: id,
+              newCredit: newCredit,
+            },
+          }
+        );
+        setTransactionToDisplay("");
+      } catch (error) {
+        console.log(error.response.data);
+      }
+    };
+    await Update();
+    console.log("handelUpdateCreditComleted");
   }
-  function handelWithdraw() {
-    console.log("handelWithdraw ");
+
+  async function handelWithdraw({ id, amount }) {
+    const withdraw = async () => {
+      try {
+        const res = axios.put(
+          `${import.meta.env.VITE_API_LINK}/withdrawMoney`,
+          null,
+          {
+            params: {
+              id: id,
+              amount: amount,
+            },
+          }
+        );
+        setTransactionToDisplay("");
+      } catch (error) {
+        console.log(error.response.data);
+      }
+    };
+    await withdraw();
+    console.log("handelWithdraw");
   }
-  function handelTransfer() {
+
+  async function handelTransfer({ idFrom, idTo, amount }) {
+    const transferMoney = async () => {
+      try {
+        const res = axios.put(
+          `${import.meta.env.VITE_API_LINK}/transferMoney`,
+          null,
+          {
+            params: {
+              idFrom:idFrom,
+              idTo:idTo,
+              amount:idTo,
+            },
+          }
+        );
+        setTransactionToDisplay("");
+      } catch (error) {
+        console.log(error.response.data);
+      }
+    };
+    await transferMoney();
     console.log("handelTransfer");
   }
 
@@ -79,6 +139,21 @@ function TransactionsPage() {
         {transactionToDisplay === deposit && (
           <>
             <Deposit handleDeposit={handelDeposit} />
+          </>
+        )}
+        {transactionToDisplay === updateCredit && (
+          <>
+            <UpdateCredit handler={handelUpdateCredit} />
+          </>
+        )}
+        {transactionToDisplay === withdrawMoney && (
+          <>
+            <Withdraw handler={handelWithdraw} />
+          </>
+        )}
+        {transactionToDisplay === transferFunds && (
+          <>
+            <Transfer handler={handelTransfer} />
           </>
         )}
       </div>

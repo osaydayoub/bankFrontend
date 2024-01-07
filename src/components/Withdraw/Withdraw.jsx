@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import "./Deposit.css";
-function Deposit({ handleDeposit }) {
-  const [userID, setuserID] = useState("");
-  const [amount, setAmount] = useState(0);
-  function handleSubmit(e) {
-    e.preventDefault();
-    handleDeposit({
-      ID: userID,
-      amount: amount,
-    });
-  }
+
+function Withdraw({handler}) {
+    const [userID, setuserID] = useState("");
+    const [withdraw, setWithdraw] = useState(0);
+    function handleSubmit(e) {
+      e.preventDefault();
+      handler({
+        id: userID,
+        amount: withdraw,
+      });
+    }
   return (
-    <div >
-      <h3>Deposit</h3>
+    <div>
+      <h3>Withdraw</h3>
       <form onSubmit={(e) => handleSubmit(e)}>
         <div>
           <label htmlFor="userId">User Id</label>
@@ -26,12 +26,12 @@ function Deposit({ handleDeposit }) {
         </div>
 
         <div>
-          <label htmlFor="amount">Deposit Amount</label>
+          <label htmlFor="withdraw">Withdraw Amount</label>
           <br />
           <input
             type="number"
-            id="amount"
-            onChange={(e) => setAmount(e.target.value)}
+            id="withdraw"
+            onChange={(e) => setWithdraw(e.target.value)}
             required
           />
         </div>
@@ -43,4 +43,4 @@ function Deposit({ handleDeposit }) {
   );
 }
 
-export default Deposit;
+export default Withdraw;
