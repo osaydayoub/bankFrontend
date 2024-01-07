@@ -11,7 +11,7 @@ function TransactionsPage() {
     "Withdraw Money",
     "Transfer Funds",
   ];
-  const { deposit, updateCredit, withdrawMoney, transferFunds } = Transactions;
+  const [deposit, updateCredit, withdrawMoney, transferFunds] = Transactions;
 
   async function handelDeposit({ ID, amount }) {
     const deposit = async () => {
@@ -26,9 +26,7 @@ function TransactionsPage() {
             },
           }
         );
-        // const res = await axios.put(
-        //   `${import.meta.env.VITE_API_LINK}/depositCash`,{params}
-        // );
+        setTransactionToDisplay("");
       } catch (error) {
         console.log(error.response.data);
       }
@@ -36,6 +34,7 @@ function TransactionsPage() {
     await deposit();
     console.log("handelDepositComleted");
   }
+
   function handelUpdateCredit() {
     console.log("handelUpdateCredit");
   }
@@ -66,7 +65,11 @@ function TransactionsPage() {
       <div className="transactions_container">
         {Transactions.map((transaction, index) => {
           return (
-            <button className="btn-page" key={index} onClick={handlerArray[index]}>
+            <button
+              className="btn-page"
+              key={index}
+              onClick={handlerArray[index]}
+            >
               {transaction}
             </button>
           );
@@ -74,7 +77,9 @@ function TransactionsPage() {
       </div>
       <div className="transaction-container">
         {transactionToDisplay === deposit && (
-          <Deposit handleDeposit={handelDeposit} />
+          <>
+            <Deposit handleDeposit={handelDeposit} />
+          </>
         )}
       </div>
     </div>
